@@ -1,0 +1,1373 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#123b3b" />
+    <meta
+      name="description"
+      content="Gestión documental del SG-SST de Trigo Pan Corozal"
+    />
+    <title>Trigo Pan Corozal · Gestión documental SG-SST</title>
+    <style>
+      :root {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          sans-serif;
+        color: #18312f;
+        background: #f4f7f4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 250px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .side {
+        background: #123b3b;
+        color: #effbf6;
+        padding: 28px 17px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 11px;
+        display: grid;
+        text-align: center;
+        
+      }
+      .brandmark {
+        display: flex;
+        justify-content: center;
+        width: 200px;
+        height: 90px;
+      }
+      .brand {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+      }
+      .brandsub {
+        font-size: 11px;
+        color: #bdd4cc;
+        margin-top: 3px;
+      }
+      .nav {
+        display: grid;
+        gap: 7px;
+      }
+      .nav button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 14px;
+        background: transparent;
+        border: 0;
+        color: #c4d8d1;
+        text-align: left;
+        border-radius: 12px;
+        font-weight: 600;
+      }
+      .nav button:hover,
+      .nav button.active {
+        background: #285a53;
+        color: white;
+      }
+      .nav .sym {
+        font-size: 17px;
+        width: 22px;
+        text-align: center;
+      }
+      .aside-bottom {
+        margin-top: auto;
+        border-top: 1px solid #3e6863;
+        padding: 18px 12px;
+        font-size: 12px;
+        color: #bbd4c9;
+        line-height: 1.55;
+      }
+      .main {
+        min-width: 0;
+        padding: 32px clamp(20px, 4vw, 58px) 44px;
+        max-width: 1540px;
+        width: 100%;
+        margin: auto;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 27px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        color: #42816e;
+        font-weight: 800;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+      }
+      .top h1 {
+        font-size: clamp(25px, 3vw, 36px);
+        letter-spacing: -1.3px;
+        margin: 7px 0;
+      }
+      .muted {
+        color: #70817d;
+        font-size: 13px;
+        margin: 6px 0;
+      }
+      .topactions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        border: 1px solid #d8e3dd;
+        border-radius: 11px;
+        padding: 11px 15px;
+        background: #fff;
+        color: #245147;
+        font-weight: 750;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .btn:hover {
+        filter: brightness(0.97);
+      }
+      .btn.primary {
+        background: #26674f;
+        color: white;
+        border-color: #26674f;
+      }
+      .btn.danger {
+        color: #ae3939;
+      }
+      .outline {
+        border: 1px solid #ebdfad;
+        background: #fffbeb;
+        color: #706034;
+        padding: 13px 17px;
+        border-radius: 11px;
+        margin: 0 0 22px;
+        font-size: 13px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
+      }
+      .metric {
+        background: white;
+        border: 1px solid #e4eae5;
+        border-radius: 16px;
+        padding: 21px 22px;
+        box-shadow: 0 2px 10px #1a3a2b06;
+      }
+      .metric .label {
+        color: #788781;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .metric strong {
+        font-size: 34px;
+        display: block;
+        margin: 7px 0 1px;
+        letter-spacing: -1.5px;
+      }
+      .metric .extra {
+        font-size: 11px;
+        color: #85978c;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(270px, 1fr);
+        gap: 18px;
+        margin-top: 20px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e4eae5;
+        border-radius: 16px;
+        padding: 23px;
+        box-shadow: 0 2px 10px #1a3a2b06;
+      }
+      .card h3 {
+        margin: 0 0 15px;
+        font-size: 16px;
+        letter-spacing: -0.3px;
+      }
+      .barrow {
+        display: grid;
+        grid-template-columns: 140px minmax(0, 1fr) 27px;
+        align-items: center;
+        gap: 12px;
+        margin: 14px 0;
+        font-size: 12px;
+        color: #52645d;
+      }
+      .track {
+        height: 10px;
+        border-radius: 12px;
+        background: #edf2ed;
+        overflow: hidden;
+      }
+      .track span {
+        display: block;
+        height: 100%;
+        border-radius: 12px;
+      }
+      .recent {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .recent li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 1px solid #eaf0ea;
+        padding: 11px 0;
+        font-size: 13px;
+      }
+      .recent li:last-child {
+        border: 0;
+      }
+      .tag {
+        font-size: 11px;
+        font-weight: 800;
+        border-radius: 999px;
+        padding: 5px 9px;
+        white-space: nowrap;
+        display: inline-block;
+      }
+      .tag.green {
+        background: #e3f5e8;
+        color: #1d7a47;
+      }
+      .tag.amber {
+        background: #fff2d8;
+        color: #93651b;
+      }
+      .tag.red {
+        background: #ffe7e6;
+        color: #ae3b3b;
+      }
+      .tag.gray {
+        background: #edf0f0;
+        color: #657875;
+      }
+      .actions {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      .linkbtn {
+        background: transparent;
+        border: none;
+        color: #236b55;
+        font-size: 12px;
+        font-weight: 750;
+        padding: 5px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 12px;
+        margin: 18px 0;
+        flex-wrap: wrap;
+      }
+      .field,
+      .select {
+        border: 1px solid #d7e2dd;
+        border-radius: 10px;
+        background: #fff;
+        padding: 11px 13px;
+        outline: 0;
+        min-width: 0;
+      }
+      .field:focus,
+      .select:focus,
+      textarea:focus {
+        border-color: #389779;
+        box-shadow: 0 0 0 3px #d2efe2;
+      }
+      .toolbar .field {
+        flex: 1;
+        min-width: 200px;
+      }
+      .tablewrap {
+        background: #fff;
+        border: 1px solid #e4eae5;
+        border-radius: 16px;
+        overflow-x: auto;
+        box-shadow: 0 2px 10px #1a3a2b06;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 12px;
+      }
+      th {
+        background: #eef4f0;
+        color: #4d6b5f;
+        letter-spacing: 0.4px;
+        font-size: 10px;
+        text-transform: uppercase;
+      }
+      td,
+      th {
+        padding: 14px 14px;
+        border-bottom: 1px solid #ebf0ed;
+        vertical-align: middle;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      td strong {
+        font-size: 12px;
+      }
+      td small {
+        display: block;
+        color: #889891;
+        margin-top: 3px;
+      }
+      td .tag {
+        font-size: 10px;
+      }
+      .empty {
+        padding: 45px;
+        text-align: center;
+        color: #788a81;
+      }
+      .notes {
+        font-size: 12px;
+        color: #688076;
+        line-height: 1.6;
+        margin-top: 16px;
+      }
+      .pane {
+        display: none;
+      }
+      .pane.active {
+        display: block;
+      }
+      .formgrid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+      }
+      .formgrid label {
+        display: grid;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #50675d;
+      }
+      .formgrid label.span {
+        grid-column: 1/-1;
+      }
+      .formgrid input,
+      .formgrid select,
+      .formgrid textarea {
+        width: 100%;
+        border: 1px solid #d6e2da;
+        border-radius: 9px;
+        padding: 10px 12px;
+        background: white;
+        color: #1c3430;
+      }
+      .formgrid textarea {
+        min-height: 73px;
+        resize: vertical;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: #0e29259c;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        z-index: 5;
+      }
+      .modal.open {
+        display: flex;
+      }
+      .dialog {
+        background: #fff;
+        border-radius: 18px;
+        padding: 28px;
+        width: min(700px, 100%);
+        max-height: 90vh;
+        overflow: auto;
+        box-shadow: 0 25px 80px #08251a48;
+      }
+      .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .dialog-header h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .dialog-footer {
+        margin-top: 22px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 9px;
+      }
+      .x {
+        border: 0;
+        background: #f1f5f2;
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 20px;
+      }
+      .footnote {
+        font-size: 12px;
+        color: #778982;
+        padding-top: 24px;
+      }
+      .fileinput {
+        display: none;
+      }
+      .ret-info {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #566d63;
+      }
+      .ret-info strong {
+        color: #223b32;
+      }
+      .countbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .pill {
+        background: #f1f6f2;
+        border-radius: 8px;
+        padding: 7px 12px;
+        font-size: 12px;
+        color: #426c55;
+      }
+      .info-card {
+        padding: 15px;
+        border: 1px solid #dde9dd;
+        border-radius: 12px;
+        margin-bottom: 14px;
+        background: #fbfdfb;
+      }
+      .info-card p {
+        margin: 6px 0;
+        color: #60766a;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      @media (max-width: 1000px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+        .side {
+          padding: 14px 20px;
+          gap: 10px;
+        }
+        .logo {
+          display: none;
+        }
+        .nav {
+          display: flex;
+          overflow: auto;
+        }
+        .nav button {
+          width: auto;
+          white-space: nowrap;
+          padding: 10px;
+        }
+        .aside-bottom {
+          display: none;
+        }
+        .summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .main {
+          padding: 25px 18px;
+        }
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .summary {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .metric {
+          padding: 15px;
+        }
+        .metric strong {
+          font-size: 29px;
+        }
+        .formgrid {
+          grid-template-columns: 1fr;
+        }
+        .topactions {
+          width: 100%;
+        }
+        .topactions .btn {
+          flex: 1;
+          justify-content: center;
+        }
+        .barrow {
+          grid-template-columns: 110px minmax(0, 1fr) 20px;
+        }
+        .card {
+          padding: 17px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="side">
+        <div class="logo">
+          <div class="brandmark">
+            <img src="logo.png" alt="Logo de Trigo Pan" height="80" width="200" />
+          </div>
+          <div>
+            <div class="brand">TRIGO PAN</div>
+            <div class="brandsub">Corozal · Gestión SG-SST</div>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Navegación">
+          <button data-tab="panel" class="active">
+            <span class="sym">◫</span> Panel general</button
+          ><button data-tab="documentos">
+            <span class="sym">▤</span> Documentos</button
+          ><button data-tab="versiones">
+            <span class="sym">◷</span> Versiones</button
+          ><button data-tab="retencion">
+            <span class="sym">▣</span> Retención</button
+          ><button data-tab="alertas">
+            <span class="sym">⚑</span> Alertas
+          </button>
+        </nav>
+        <div class="aside-bottom">
+          SG-SST · Riesgo clase III<br />12 trabajadores · Corozal, Sucre<br /><br />Los
+          datos se guardan en este navegador. Exporta copias de seguridad
+          regularmente.
+        </div>
+      </aside>
+      <main class="main">
+        <header class="top">
+          <div>
+            <div class="eyebrow">Sistema documental · SG-SST</div>
+            <h1 id="page-title">Panel de control</h1>
+            <p class="muted">
+              Organización y seguimiento de documentos de Trigo Pan Corozal
+            </p>
+          </div>
+          <div class="topactions">
+            <button class="btn" id="export-json">↓ Respaldo JSON</button
+            ><button class="btn" id="export-csv">↓ Exportar CSV</button
+            ><button class="btn primary" id="new-doc">
+              ＋ Nuevo documento
+            </button>
+          </div>
+        </header>
+        <div class="outline" role="note">
+          Proyecto académico con <strong>datos simulados</strong>. Ningún
+          registro precargado acredita que el documento esté aprobado o vigente.
+          Los cambios se guardan solo en este navegador.
+        </div>
+        <section class="pane active" id="pane-panel">
+          <div class="summary" id="metrics"></div>
+          <div class="grid2">
+            <div class="card">
+              <h3>Estado de la documentación</h3>
+              <div id="bars"></div>
+            </div>
+            <div class="card">
+              <h3>Acciones prioritarias</h3>
+              <ul class="recent" id="priority"></ul>
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h3>Cómo empezar</h3>
+              <ol class="ret-info">
+                <li>Busca y abre una ficha en <strong>Documentos</strong>.</li>
+                <li>
+                  Registra la fecha de revisión, aprobación y enlace al archivo.
+                </li>
+                <li>
+                  Marca evidencia validada solo cuando exista soporte real.
+                </li>
+                <li>Revisa el panel y las alertas actualizadas.</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h3>Estado del proyecto</h3>
+              <p class="ret-info">
+                Diseñado para la panadería Trigo Pan Corozal, con procesos de
+                producción, atención y ventas y administración. El registro
+                controla metadatos y enlaces:
+                <strong
+                  >no almacena historias clínicas ni documentos adjuntos</strong
+                >.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="pane" id="pane-documentos">
+          <div class="countbar">
+            <h2>Inventario documental</h2>
+            <span class="pill" id="doc-count"></span>
+          </div>
+          <div class="toolbar">
+            <input
+              class="field"
+              id="search"
+              placeholder="Buscar por código, nombre o responsable"
+              aria-label="Buscar documentos"
+            /><select
+              class="select"
+              id="status-filter"
+              aria-label="Filtrar por estado"
+            >
+              <option value="">Todos los estados</option>
+              <option>Sin evidencia</option>
+              <option>Sin fecha</option>
+              <option>Vigente</option>
+              <option>Próximo</option>
+              <option>Vencido</option></select
+            ><select
+              class="select"
+              id="area-filter"
+              aria-label="Filtrar por área"
+            >
+              <option value="">Todas las áreas</option>
+              <option>General</option>
+              <option>Producción</option>
+              <option>Atención y ventas</option>
+              <option>Administración</option>
+            </select>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Documento</th>
+                  <th>Área</th>
+                  <th>Responsable</th>
+                  <th>Próxima revisión</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="doc-body"></tbody>
+            </table>
+          </div>
+          <p class="notes">
+            Para adjuntar un archivo, guarda el documento en una carpeta o
+            servicio de almacenamiento y pega su enlace en la ficha. Los enlaces
+            externos solo funcionarán si tienes permiso para abrirlos.
+          </p>
+        </section>
+        <section class="pane" id="pane-versiones">
+          <div class="countbar">
+            <h2>Historial de versiones</h2>
+            <span class="pill" id="version-count"></span>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Código</th>
+                  <th>Documento</th>
+                  <th>Versión</th>
+                  <th>Cambio</th>
+                  <th>Responsable</th>
+                </tr>
+              </thead>
+              <tbody id="versions-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="pane" id="pane-retencion">
+          <h2>Control de conservación y retención</h2>
+          <div class="info-card">
+            <strong>Cómo se calcula</strong>
+            <p>
+              Cuando el registro tenga plazo de 20 años y una fecha de
+              terminación laboral, el sistema calcula la fecha mínima de
+              conservación. Para los demás documentos, el plazo interno está
+              pendiente de definir. No se debe eliminar un documento de forma
+              automática.
+            </p>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Documento</th>
+                  <th>Regla de retención</th>
+                  <th>Inicio del cómputo</th>
+                  <th>Conservar hasta</th>
+                  <th>Observaciones</th>
+                </tr>
+              </thead>
+              <tbody id="ret-body"></tbody>
+            </table>
+          </div>
+          <p class="notes">
+            Referencia: Decreto 1072 de 2015, artículo 2.2.4.6.13, y Resolución
+            1843 de 2025. Los 20 años aplican a registros específicos de SST, no
+            automáticamente a todo documento. Las historias clínicas requieren
+            custodia profesional independiente.
+          </p>
+        </section>
+        <section class="pane" id="pane-alertas">
+          <div class="countbar">
+            <h2>Alertas de seguimiento</h2>
+            <span class="pill" id="alert-count"></span>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Prioridad</th>
+                  <th>Código</th>
+                  <th>Documento</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="alert-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <div class="footnote">
+          Uso académico · Trigo Pan Corozal · Control documental propuesto para
+          el Sistema de Gestión de Seguridad y Salud en el Trabajo
+        </div>
+      </main>
+    </div>
+    <div
+      class="modal"
+      id="editor"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editor-title"
+    >
+      <div class="dialog">
+        <div class="dialog-header">
+          <h2 id="editor-title">Nuevo documento</h2>
+          <button class="x" id="close-editor" aria-label="Cerrar">×</button>
+        </div>
+        <form id="doc-form">
+          <div class="formgrid">
+            <label
+              >Código<input
+                id="f-code"
+                required
+                maxlength="24"
+                placeholder="SST-019" /></label
+            ><label
+              >Versión<input
+                id="f-version"
+                required
+                value="01"
+                maxlength="15" /></label
+            ><label class="span"
+              >Nombre del documento<input
+                id="f-name"
+                required
+                maxlength="150" /></label
+            ><label
+              >Área<select id="f-area">
+                <option>General</option>
+                <option>Producción</option>
+                <option>Atención y ventas</option>
+                <option>Administración</option>
+              </select></label
+            ><label
+              >Responsable<input
+                id="f-owner"
+                required
+                placeholder="Responsable SG-SST" /></label
+            ><label
+              >Etapa<select id="f-stage">
+                <option>Borrador</option>
+                <option>En revisión</option>
+                <option>Aprobado</option>
+                <option>Obsoleto</option>
+              </select></label
+            ><label
+              >Evidencia validada<select id="f-evidence">
+                <option value="false">No</option>
+                <option value="true">Sí</option>
+              </select></label
+            ><label
+              >Fecha de aprobación<input type="date" id="f-approved" /></label
+            ><label>Próxima revisión<input type="date" id="f-review" /></label
+            ><label
+              >Regla de retención<select id="f-retention">
+                <option value="Interna">Por definir internamente</option>
+                <option value="20">
+                  20 años desde fin del vínculo laboral
+                </option>
+              </select></label
+            ><label
+              >Fecha de terminación del vínculo (si aplica)<input
+                type="date"
+                id="f-enddate" /></label
+            ><label class="span"
+              >Ubicación o enlace del archivo<input
+                id="f-url"
+                placeholder="https://... o carpeta local" /></label
+            ><label class="span"
+              >Motivo del cambio de versión<textarea
+                id="f-change"
+                placeholder="Ejemplo: revisión del procedimiento"
+              ></textarea></label
+            ><label class="span"
+              >Observaciones<textarea
+                id="f-notes"
+                placeholder="Descripción y particularidades"
+              ></textarea>
+            </label>
+          </div>
+          <div class="dialog-footer">
+            <button type="button" class="btn" id="cancel-editor">
+              Cancelar</button
+            ><button type="submit" class="btn primary">Guardar registro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <input
+      class="fileinput"
+      type="file"
+      id="import-file"
+      accept="application/json,.json"
+    />
+    <script>
+      (() => {
+        "use strict";
+        const KEY = "trigo_pan_sgsst_docs_v1",
+          VER = "trigo_pan_sgsst_versions_v1";
+        const sampleNames = [
+          ["SST-001", "Política de Seguridad y Salud en el Trabajo", "General"],
+          ["SST-002", "Objetivos del SG-SST", "General"],
+          ["SST-003", "Evaluación inicial del SG-SST", "Administración"],
+          ["SST-004", "Plan anual de trabajo", "General"],
+          [
+            "SST-005",
+            "Matriz de peligros y valoración de riesgos",
+            "Producción",
+          ],
+          ["SST-006", "Programa de capacitaciones", "General"],
+          ["SST-007", "Registros de asistencia a capacitaciones", "General"],
+          ["SST-008", "Actas de inducción y reinducción", "General"],
+          ["SST-009", "Entrega y seguimiento de EPP", "Producción"],
+          [
+            "SST-010",
+            "Plan de prevención y respuesta ante emergencias",
+            "General",
+          ],
+          ["SST-011", "Simulacros de emergencia", "General"],
+          ["SST-012", "Conceptos médicos ocupacionales", "Administración"],
+          [
+            "SST-013",
+            "Vigilancia epidemiológica ocupacional",
+            "Administración",
+          ],
+          ["SST-014", "Mediciones ambientales ocupacionales", "Producción"],
+          ["SST-015", "Investigaciones de accidentes e incidentes", "General"],
+          ["SST-016", "Actas del COPASST", "Administración"],
+          ["SST-017", "Inspecciones de seguridad", "Producción"],
+          ["SST-018", "Revisión por la alta dirección", "Administración"],
+        ];
+        const longRetention = new Set([
+          "SST-007",
+          "SST-008",
+          "SST-012",
+          "SST-013",
+          "SST-014",
+        ]);
+        function seed() {
+          return sampleNames.map(([code, name, area]) => ({
+            id: crypto.randomUUID(),
+            code,
+            name,
+            area,
+            owner:
+              code === "SST-001" || code === "SST-018"
+                ? "Juan Carlos Delgado"
+                : "Responsable SG-SST",
+            version: "01",
+            stage: "Borrador",
+            evidence: false,
+            approved: "",
+            review: "",
+            retention: longRetention.has(code) ? "20" : "Interna",
+            enddate: "",
+            url: "",
+            notes: "Ejemplo académico simulado. Pendiente de validación.",
+            sample: true,
+          }));
+        }
+        function safeRead(k, fallback) {
+          try {
+            const x = JSON.parse(localStorage.getItem(k));
+            return Array.isArray(x) ? x : fallback;
+          } catch {
+            return fallback;
+          }
+        }
+        let docs = safeRead(KEY, seed()),
+          versions = safeRead(VER, []),
+          editing = null;
+        function persist() {
+          localStorage.setItem(KEY, JSON.stringify(docs));
+          localStorage.setItem(VER, JSON.stringify(versions));
+        }
+        function parseDate(d) {
+          return d ? new Date(d + "T12:00:00") : null;
+        }
+        function status(x) {
+          if (!x.evidence || x.stage !== "Aprobado" || !x.approved)
+            return "Sin evidencia";
+          if (!x.review) return "Sin fecha";
+          const diff = Math.floor(
+            (parseDate(x.review) - new Date()) / 86400000,
+          );
+          if (diff < 0) return "Vencido";
+          if (diff <= 30) return "Próximo";
+          return "Vigente";
+        }
+        const tag = (x) =>
+          ({
+            Vigente: "green",
+            Próximo: "amber",
+            Vencido: "red",
+            "Sin evidencia": "gray",
+            "Sin fecha": "amber",
+          })[x] || "gray";
+        const escape = (s) =>
+          String(s ?? "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+        const fdate = (s) =>
+          s
+            ? new Date(s + "T12:00:00").toLocaleDateString("es-CO", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : "Por definir";
+        const labelStatus = (x) =>
+          `<span class="tag ${tag(x)}">${escape(x)}</span>`;
+        function retentionDate(x) {
+          if (x.retention !== "20" || !x.enddate) return "";
+          const d = parseDate(x.enddate);
+          d.setFullYear(d.getFullYear() + 20);
+          return d.toISOString().slice(0, 10);
+        }
+        function render() {
+          const count = (t) => docs.filter((x) => status(x) === t).length;
+          const total = docs.length,
+            good = count("Vigente"),
+            soon = count("Próximo"),
+            late = count("Vencido"),
+            no = count("Sin evidencia"),
+            nodate = count("Sin fecha");
+          document.getElementById("metrics").innerHTML = [
+            [total, "Documentos registrados", "Total inventariado"],
+            [good, "Vigentes", "Con evidencia validada"],
+            [soon, "Por revisar", "En los próximos 30 días"],
+            [
+              no + late + nodate,
+              "Requieren atención",
+              "Falta soporte, fecha o revisión",
+            ],
+          ]
+            .map(
+              ([n, l, e]) =>
+                `<div class="metric"><div class="label">${l}</div><strong>${n}</strong><div class="extra">${e}</div></div>`,
+            )
+            .join("");
+          const bars = [
+            ["Vigentes", good, "#3da574"],
+            ["Próximos", soon, "#e6b44d"],
+            ["Vencidos", late, "#d86961"],
+            ["Sin evidencia", no, "#98a9a3"],
+            ["Sin fecha", nodate, "#d0a55c"],
+          ];
+          document.getElementById("bars").innerHTML = bars
+            .map(
+              ([n, v, c]) =>
+                `<div class="barrow"><span>${n}</span><div class="track"><span style="width:${total ? (100 * v) / total : 0}%;background:${c}"></span></div><strong>${v}</strong></div>`,
+            )
+            .join("");
+          const ranked = [...docs]
+            .filter((x) => status(x) !== "Vigente")
+            .sort((a, b) => {
+              const p = {
+                Vencido: 0,
+                Próximo: 1,
+                "Sin evidencia": 2,
+                "Sin fecha": 3,
+              };
+              return p[status(a)] - p[status(b)];
+            });
+          document.getElementById("priority").innerHTML =
+            ranked
+              .slice(0, 5)
+              .map(
+                (x) =>
+                  `<li><span><strong>${escape(x.code)}</strong><br>${escape(x.name)}</span>${labelStatus(status(x))}</li>`,
+              )
+              .join("") || "<li>Sin pendientes registrados</li>";
+          const term = document.getElementById("search").value.toLowerCase(),
+            ss = document.getElementById("status-filter").value,
+            area = document.getElementById("area-filter").value;
+          const filtered = docs.filter(
+            (x) =>
+              (x.code + " " + x.name + " " + x.owner)
+                .toLowerCase()
+                .includes(term) &&
+              (!ss || status(x) === ss) &&
+              (!area || x.area === area),
+          );
+          document.getElementById("doc-count").textContent =
+            filtered.length + " de " + total;
+          document.getElementById("doc-body").innerHTML =
+            filtered
+              .map(
+                (x) =>
+                  `<tr><td><strong>${escape(x.code)}</strong></td><td><strong>${escape(x.name)}</strong><small>Versión ${escape(x.version)} · ${escape(x.stage)}${x.sample ? " · Ejemplo simulado" : ""}</small></td><td>${escape(x.area)}</td><td>${escape(x.owner)}</td><td>${fdate(x.review)}</td><td>${labelStatus(status(x))}</td><td><div class="actions"><button class="linkbtn" data-edit="${x.id}">Editar</button><button class="linkbtn" data-delete="${x.id}">Eliminar</button>${/^https?:\/\//.test(x.url) ? `<button class="linkbtn" data-open="${x.id}">Abrir</button>` : ""}</div></td></tr>`,
+              )
+              .join("") ||
+            '<tr><td colspan="7" class="empty">No hay documentos para estos filtros.</td></tr>';
+          document.getElementById("version-count").textContent =
+            versions.length + " cambios";
+          document.getElementById("versions-body").innerHTML =
+            [...versions]
+              .reverse()
+              .map(
+                (x) =>
+                  `<tr><td>${escape(x.date)}</td><td>${escape(x.code)}</td><td>${escape(x.name)}</td><td>${escape(x.version)}</td><td>${escape(x.change)}</td><td>${escape(x.owner)}</td></tr>`,
+              )
+              .join("") ||
+            '<tr><td colspan="6" class="empty">No hay cambios registrados todavía.</td></tr>';
+          document.getElementById("ret-body").innerHTML = docs
+            .map(
+              (x) =>
+                `<tr><td><strong>${escape(x.code)}</strong><small>${escape(x.name)}</small></td><td>${x.retention === "20" ? "20 años mínimos desde el retiro" : "Plazo interno por definir"}</td><td>${fdate(x.enddate)}</td><td>${fdate(retentionDate(x))}</td><td>${escape(x.retention === "20" ? "Retención específica por trabajador; validar aplicabilidad." : "Definir tabla de retención con responsable.")}</td></tr>`,
+            )
+            .join("");
+          document.getElementById("alert-count").textContent =
+            ranked.length + " por atender";
+          document.getElementById("alert-body").innerHTML =
+            ranked
+              .map((x) => {
+                const s = status(x),
+                  act =
+                    s === "Vencido"
+                      ? "Revisar y actualizar"
+                      : s === "Próximo"
+                        ? "Programar revisión"
+                        : s === "Sin fecha"
+                          ? "Asignar fecha de revisión"
+                          : "Validar aprobación y evidencia";
+                return `<tr><td>${s === "Vencido" ? "Alta" : s === "Próximo" ? "Media" : "Por verificar"}</td><td>${escape(x.code)}</td><td>${escape(x.name)}</td><td>${fdate(x.review)}</td><td>${labelStatus(s)}</td><td>${act}</td></tr>`;
+              })
+              .join("") ||
+            '<tr><td colspan="6" class="empty">No hay alertas activas.</td></tr>';
+        }
+        const inputs = {
+          code: "f-code",
+          name: "f-name",
+          area: "f-area",
+          owner: "f-owner",
+          version: "f-version",
+          stage: "f-stage",
+          approved: "f-approved",
+          review: "f-review",
+          retention: "f-retention",
+          enddate: "f-enddate",
+          url: "f-url",
+          notes: "f-notes",
+        };
+        function openEditor(id) {
+          editing = id || null;
+          const x = docs.find((x) => x.id === id);
+          document.getElementById("editor-title").textContent = x
+            ? "Editar documento"
+            : "Nuevo documento";
+          document.getElementById("doc-form").reset();
+          for (const [k, el] of Object.entries(inputs))
+            document.getElementById(el).value =
+              x?.[k] ||
+              {
+                version: "01",
+                retention: "Interna",
+                stage: "Borrador",
+                area: "General",
+              }[k] ||
+              "";
+          document.getElementById("f-evidence").value = x?.evidence
+            ? "true"
+            : "false";
+          document.getElementById("f-change").value = "";
+          document.getElementById("editor").classList.add("open");
+          document.getElementById("f-name").focus();
+        }
+        function close() {
+          document.getElementById("editor").classList.remove("open");
+        }
+        function save(e) {
+          e.preventDefault();
+          const x = Object.fromEntries(
+            Object.entries(inputs).map(([k, el]) => [
+              k,
+              document.getElementById(el).value.trim(),
+            ]),
+          );
+          x.code = x.code.toUpperCase();
+          x.evidence = document.getElementById("f-evidence").value === "true";
+          if (
+            docs.some(
+              (v) => v.code.toUpperCase() === x.code && v.id !== editing,
+            )
+          ) {
+            alert("El código ya existe. Usa uno diferente.");
+            return;
+          }
+          if (x.evidence && (!x.approved || x.stage !== "Aprobado")) {
+            alert(
+              "Para validar evidencia, primero marca Aprobado e indica fecha de aprobación.",
+            );
+            return;
+          }
+          const prior = docs.find((d) => d.id === editing);
+          const changed =
+            !prior ||
+            JSON.stringify(
+              Object.fromEntries(Object.keys(x).map((k) => [k, prior[k]])),
+            ) !== JSON.stringify(x);
+          if (!changed) {
+            close();
+            return;
+          }
+          const entry = {
+            ...prior,
+            ...x,
+            id: editing || crypto.randomUUID(),
+            sample: false,
+          };
+          if (editing) docs = docs.map((d) => (d.id === editing ? entry : d));
+          else docs.push(entry);
+          if (
+            !prior ||
+            prior.version !== entry.version ||
+            document.getElementById("f-change").value.trim()
+          )
+            versions.push({
+              date: new Date().toLocaleDateString("es-CO"),
+              code: entry.code,
+              name: entry.name,
+              version: entry.version,
+              owner: entry.owner,
+              change:
+                document.getElementById("f-change").value.trim() ||
+                (!prior ? "Creación del registro" : "Actualización de versión"),
+            });
+          persist();
+          close();
+          render();
+        }
+        document.querySelectorAll("[data-tab]").forEach((b) =>
+          b.addEventListener("click", () => {
+            document
+              .querySelectorAll("[data-tab]")
+              .forEach((x) => x.classList.toggle("active", x === b));
+            document
+              .querySelectorAll(".pane")
+              .forEach((x) =>
+                x.classList.toggle("active", x.id === "pane-" + b.dataset.tab),
+              );
+            document.getElementById("page-title").textContent = {
+              panel: "Panel de control",
+              documentos: "Documentos del SG-SST",
+              versiones: "Historial de versiones",
+              retencion: "Retención documental",
+              alertas: "Alertas y seguimiento",
+            }[b.dataset.tab];
+          }),
+        );
+        document.getElementById("new-doc").onclick = () => openEditor();
+        document.getElementById("close-editor").onclick = close;
+        document.getElementById("cancel-editor").onclick = close;
+        document.getElementById("editor").onclick = (e) => {
+          if (e.target.id === "editor") close();
+        };
+        document.getElementById("doc-form").onsubmit = save;
+        for (const id of ["search", "status-filter", "area-filter"])
+          document
+            .getElementById(id)
+            .addEventListener(id === "search" ? "input" : "change", render);
+        document.getElementById("doc-body").addEventListener("click", (e) => {
+          const b = e.target.closest("button");
+          if (!b) return;
+          const id = b.dataset.edit || b.dataset.delete || b.dataset.open,
+            x = docs.find((d) => d.id === id);
+          if (!x) return;
+          if (b.dataset.edit) openEditor(id);
+          if (
+            b.dataset.delete &&
+            confirm(
+              "¿Eliminar el registro " +
+                x.code +
+                "? Esta acción no elimina archivos externos.",
+            )
+          ) {
+            docs = docs.filter((d) => d.id !== id);
+            persist();
+            render();
+          }
+          if (b.dataset.open && /^https?:\/\//.test(x.url))
+            window.open(x.url, "_blank", "noopener,noreferrer");
+        });
+        function download(name, type, content) {
+          const blob = new Blob([content], { type }),
+            a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = name;
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }
+        document.getElementById("export-json").onclick = () =>
+          download(
+            "TrigoPan_SG_SST_Respaldo.json",
+            "application/json",
+            JSON.stringify(
+              {
+                app: "Trigo Pan SG-SST",
+                version: 1,
+                exported: new Date().toISOString(),
+                docs,
+                versions,
+              },
+              null,
+              2,
+            ),
+          );
+        document.getElementById("export-csv").onclick = () => {
+          const columns = [
+            "code",
+            "name",
+            "area",
+            "owner",
+            "version",
+            "stage",
+            "approved",
+            "review",
+            "evidence",
+            "retention",
+            "enddate",
+            "url",
+            "notes",
+          ];
+          const quote = (v) =>
+            '"' + String(v ?? "").replaceAll('"', '""') + '"';
+          download(
+            "TrigoPan_Registro_Documental.csv",
+            "text/csv;charset=utf-8",
+            "\ufeff" +
+              [
+                columns.join(";"),
+                ...docs.map((d) => columns.map((k) => quote(d[k])).join(";")),
+              ].join("\r\n"),
+          );
+        };
+        const imp = document.createElement("button");
+        imp.className = "btn";
+        imp.textContent = "↑ Importar respaldo";
+        document.getElementById("export-json").after(imp);
+        imp.onclick = () => document.getElementById("import-file").click();
+        document.getElementById("import-file").onchange = async (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          try {
+            const data = JSON.parse(await file.text());
+            if (
+              data.app !== "Trigo Pan SG-SST" ||
+              !Array.isArray(data.docs) ||
+              !Array.isArray(data.versions) ||
+              data.docs.some((d) => !d.id || !d.code || !d.name)
+            )
+              throw Error("Formato no reconocido");
+            if (
+              confirm(
+                "La importación reemplazará el inventario guardado en este navegador. ¿Continuar?",
+              )
+            ) {
+              docs = data.docs;
+              versions = data.versions;
+              persist();
+              render();
+              alert("Respaldo importado con éxito");
+            }
+          } catch (err) {
+            alert("No se pudo importar: " + err.message);
+          } finally {
+            e.target.value = "";
+          }
+        };
+        render();
+      })();
+    </script>
+  </body>
+</html>
